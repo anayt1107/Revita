@@ -7,24 +7,24 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import images from "../../../constants/images";
 import Loader from "../../../components/Loader";
-import { useGlobalContext } from "../../../context/GlobalProvider";
+// import { useGlobalContext } from "../../../context/GlobalProvider";
 
 type WelcomeScreenProps = {
   navigation: StackNavigationProp<any, any>;
 };
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => {
-  const { loading, isLogged } = useGlobalContext();
+  // const { loading, isLogged } = useGlobalContext();
 
-  useEffect(() => {
-    if (!loading && isLogged) {
-      navigation.navigate('Home');
-    }
-  });
+  // useEffect(() => {
+  //   if (!loading && isLogged) {
+  //     navigation.navigate('Home');
+  //   }
+  // });
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
-      <Loader isLoading={loading} />
+      {/* <Loader isLoading={loading} /> */}
 
       <View style={styles.container}>
 

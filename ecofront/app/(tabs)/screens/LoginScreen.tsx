@@ -1,47 +1,44 @@
-import React from 'react';
-import { View, StyleSheet, Text, ScrollView, Dimensions, Alert, Image } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  StyleSheet,
+  Text,
+  ScrollView,
+  Dimensions,
+  Alert,
+  Image,
+} from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Link } from '@react-navigation/native';
-import { useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import CustomButton from "../../../components/CustomButton";
-import FormField from "../../../components/FormField";
-import images from "../../../constants/images";
-import { useGlobalContext } from "../../../context/GlobalProvider";
-import { getCurrentUser, signIn } from "../../../lib/appwrite";
+import { SafeAreaView } from 'react-native-safe-area-context';
+import CustomButton from '../../../components/CustomButton';
+import FormField from '../../../components/FormField';
+import images from '../../../constants/images';
 
 type LoginScreenProps = {
   navigation: StackNavigationProp<any, any>;
 };
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
-  const { setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
-  const submit = async () => {
-    if (form.email === "" || form.password === "") {
-      Alert.alert("Error", "Please fill in all fields");
+  const submit = () => {
+    if (form.email === '' || form.password === '') {
+      Alert.alert('Error', 'Please fill in all fields');
+      return;
     }
 
     setSubmitting(true);
 
-    try {
-      await signIn(form.email, form.password);
-      const result = await getCurrentUser();
-      setUser(result);
-      setIsLogged(true);
-
-      Alert.alert("Success", "User signed in successfully");
-      navigation.navigate('Home');
-    } catch (error) {
-      Alert.alert("Error", error.message);
-    } finally {
+    setTimeout(() => {
       setSubmitting(false);
-    }
+      Alert.alert('Success', `Logged in with email: ${form.email}`);
+      navigation.navigate('Home');
+    }, 1000);
   };
 
   return (
@@ -50,12 +47,12 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
         <View
           className="w-full flex justify-center h-full px-4 my-6"
           style={{
-            minHeight: Dimensions.get("window").height - 400,
+            minHeight: Dimensions.get('window').height - 400,
           }}
         >
           <Image
             source={images.RevitaLogo}
-            resizeMode="start"
+            resizeMode="contain"
             className="w-[80px] h-[80px]"
           />
 
@@ -69,8 +66,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"
             keyboardType="email-address"
-            placeholder={undefined}
-
           />
 
           <FormField
@@ -78,7 +73,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"
-            placeholder={undefined}
           />
 
           <CustomButton
@@ -86,7 +80,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
             handlePress={submit}
             containerStyles={{ paddingHorizontal: 20, marginTop: 100 }}
             isLoading={isSubmitting}
-            textStyles={undefined}
           />
 
           <View className="flex justify-center pt-5 flex-row gap-2">
@@ -94,10 +87,17 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
               Don't have an account?
             </Text>
 
-            <Link to={{ screen: 'SignUp' }}
-              style={{ fontSize: 18, color: "#ffa500", fontWeight: 'bold', position: 'relative', top: 4 }}
+            <Link
+              to={{ screen: 'SignUp' }}
+              style={{
+                fontSize: 18,
+                color: '#ffa500',
+                fontWeight: 'bold',
+                position: 'relative',
+                top: 4,
+              }}
             >
-              <Text>Sign Up</Text> 
+              <Text>Sign Up</Text>
             </Link>
           </View>
         </View>
@@ -105,13 +105,5 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default LoginScreen;

@@ -14,13 +14,13 @@ import FriendsScreen from '../FriendsScreen';
 import { RootStackParamList } from '../types'; 
 
 import { registerRootComponent } from 'expo';
-import GlobalProvider from "../../../context/GlobalProvider";
+// import GlobalProvider from "../../../context/GlobalProvider";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const App: React.FC = () => {
   return (
-    <GlobalProvider>
+    // <GlobalProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false}} >
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
@@ -33,7 +33,7 @@ const App: React.FC = () => {
           <Stack.Screen name="FriendsScreen" component={FriendsScreen} options = {{gestureEnabled: false}} /> 
         </Stack.Navigator>
       </NavigationContainer>
-    </GlobalProvider>
+    // </GlobalProvider>
   );
 };
 registerRootComponent(App);

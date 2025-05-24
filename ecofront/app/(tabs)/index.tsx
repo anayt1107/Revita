@@ -7,8 +7,8 @@ import LevelWidget from '@/components/LevelWidget';
 import RecentCollectionsWidget from '@/components/RecentCollectionsWidget';
 import NavigationBar from '@/components/NavigationBar'; 
 import CustomButton from '@/components/CustomButton';
-import { useGlobalContext } from '@/context/GlobalProvider';
-import { signOut, addCurrentUserScore, getAllScores, getCurrentUserScore } from '@/lib/appwrite';
+// import { useGlobalContext } from '@/context/GlobalProvider';
+// import { signOut, addCurrentUserScore, getAllScores, getCurrentUserScore } from '@/lib/appwrite';
 import Challenge from '@/components/Challenge';
 import HowItWorksWidget from '@/components/HowItWorksWidget';
 import axios from 'axios';
@@ -22,7 +22,7 @@ const queryClient = new QueryClient();
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const [isSubmitting, setSubmitting] = useState(false);
-  const { setUser, setIsLogged } = useGlobalContext();
+  // const { setUser, setIsLogged } = useGlobalContext();
   const [challenges, setChallenges] = useState([
     { id: 1, title: 'Collect 10 plastic bottles', completed: false },
     { id: 2, title: 'Clean a local park', completed: false },
