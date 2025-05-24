@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     borderWidth: 4,
     borderColor: '#ddd',
+    marginBottom: 80,
   },
   imagePreviewContainer: {
     position: 'absolute',
