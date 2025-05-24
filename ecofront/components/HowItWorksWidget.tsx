@@ -11,12 +11,12 @@ const HowItWorksWidget: React.FC = () => {
       </Text>
       <Text style={styles.bulletPoint}>• Take pictures of trash items.</Text>
       <Text style={styles.bulletPoint}>
-        • Earn points based on the type of trash you scan:
+        • Each piece of trash you take a picture of will reward you 5 points!
       </Text>
-      <Text style={styles.bulletPoint}>   - Plastic: 10 points</Text>
+      {/* <Text style={styles.bulletPoint}>   - Plastic: 10 points</Text>
       <Text style={styles.bulletPoint}>   - Glass: 15 points</Text>
       <Text style={styles.bulletPoint}>   - Paper: 5 points</Text>
-      <Text style={styles.bulletPoint}>   - Electronics: 20 points</Text>
+      <Text style={styles.bulletPoint}>   - Electronics: 20 points</Text> */}
       <Text style={styles.bulletPoint}>
         • Complete daily challenges to earn bonus points.
       </Text>

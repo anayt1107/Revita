@@ -44,15 +44,15 @@ const StatsScreen: React.FC<StatsScreenProps> = () => {
                         </View>
                     </View>
                     <View style={styles.levelContainer}>
-                        <Text style={styles.levelText}>Level 2</Text>
-                        <Text style={styles.levelText}>"The Challenger"</Text>
-                        <Text style={styles.pointsText}>Points: 60 / 100</Text>
+                        <Text style={styles.levelText}>Level 1</Text>
+                        
+                        <Text style={styles.pointsText}>Points: 0 / 100</Text>
                     </View>
 
                     <View style={styles.statsContainer}>
-                        {['Rank', 'Trash', 'Animals', 'Days'].map((label, index) => (
+                        {['Rank', 'Trash', 'Days'].map((label, index) => (
                             <TouchableOpacity key={index} style={styles.statCircle}>
-                                <Text style={styles.statValue}>{Math.floor(Math.random() * 100)}</Text>
+                                <Text style={styles.statValue}>{0}</Text>
                                 <Text style={styles.statLabel}>{label}</Text>
                             </TouchableOpacity>
                         ))}
@@ -64,15 +64,15 @@ const StatsScreen: React.FC<StatsScreenProps> = () => {
                 
 
                 <View style={styles.achievementsContainer}>
-                    <Text style={styles.badgesTitle}>Badges</Text>
+                    {/* <Text style={styles.badgesTitle}>Badges</Text>
                     <View style={styles.badgesContainer}>
                         {['🐾', '🏆', '🌱', '🌊'].map((icon, index) => (
                             <TouchableOpacity key={index} style={styles.badge}>
                                 <Text style={styles.badgeText}>{icon}</Text>
                             </TouchableOpacity>
                         ))}
-                    </View>
-                    <Text style={styles.badgesTitle}>Trash Collections</Text>
+                    </View> */}
+                    {/* <Text style={styles.badgesTitle}>Trash Collections</Text>
 
                     <View style={styles.trashSortedContainer}>
                         <View style = {styles.trashStatCircle}>
@@ -94,117 +94,27 @@ const StatsScreen: React.FC<StatsScreenProps> = () => {
                                 </View>
                         </View>
                         
-                    </View>
-                    <Text style={styles.badgesTitle}>Animals Saved</Text>
+                    </View> */}
+                    {/* <Text style={styles.badgesTitle}>Animals Saved</Text> */}
 
-                    <View style={styles.animalsSavedContainer}>
-                        <View style = {styles.animalStatCircle}>
-                            <Image source={require('../../assets/images/fish.png')} style={styles.trashImage} />
-                            {/* <Text style={styles.statValue}>{count}</Text> */}
-                            <View style={styles.badgeCountCircle}>
-                                    <Text style={styles.badgeCount}>4</Text>
-                            </View>
-                        </View>
-                        <View style = {styles.animalStatCircle}>
-                            <Image source={require('../../assets/images/dolphin.png')} style={styles.trashImage} />
-                            {/* <Text style={styles.statValue}>{count}</Text> */}
-                            <View style={styles.badgeCountCircle}>
-                                    <Text style={styles.badgeCount}>4</Text>
-                            </View>
-                        </View>
-                        <View style = {styles.animalStatCircle}>
-                            <Image source={require('../../assets/images/turtle.png')} style={styles.trashImage} />
-                            {/* <Text style={styles.statValue}>{count}</Text> */}
-                            <View style={styles.badgeCountCircle}>
-                                    <Text style={styles.badgeCount}>4</Text>
-                            </View>
-                        </View>
-                        {/* {[4, 3, '🐢'].map((count, index) => (
-                            <View key={index} style={styles.animalStatCircle}>
-                                {typeof count === 'number' ? (
-                                    <Image source={require('../../assets/images/dolphin.png')} style={styles.trashImage} />
-                                ) : (
-                                    <Text style={styles.statValue}>{count}</Text>
-                                )}
-                                <View style={styles.badgeCountCircle}>
-                                    <Text style={styles.badgeCount}>{count}</Text>
-                                </View>
-                            </View>
-                        ))} */}
-                    </View>
+                    
 
-                    <View style={styles.additionalStatsContainer}>
-                        <Text style={styles.additionalStatsTitle}>Additional Stats</Text>
-                        <View style={styles.additionalStatsRow}>
-                            <View style={styles.statCircle}>
-                                <CircularProgress 
-                                    size={70}
-                                    progress={75}
-                                    strokeWidth={7}
-                                    strokeColor="#3498db" 
-                                />
-                                <Text style={styles.addstatLabel}>Score/Total</Text>
-                            </View>
-                            <View style={styles.statCircle}>
-                                <CircularProgress 
-                                    size={70}
-                                    progress={80} 
-                                    strokeWidth={7}
-                                    strokeColor="#3498db" 
-                                />
-                                <Text style={styles.addstatLabel}>Trash/Total</Text>
-                            </View>
-                            <View style={styles.statCircle}>
-                                <CircularProgress 
-                                    size={70}
-                                    progress={8} 
-                                    strokeWidth={7}
-                                    strokeColor="#3498db" 
-                                />
-                                <Text style={styles.addstatLabel}>Volunteering</Text>
-                            </View>
-                        </View>
+                    
 
-                        <View style={styles.additionalStatsRow}>
-                            <View style={styles.statCircle}>
-                                <CircularProgress 
-                                    size={70}
-                                    progress={40} 
-                                    strokeWidth={7}
-                                    strokeColor="#3498db" 
-                                />
-                                <Text style={styles.addstatLabel}>Daily Goal</Text>
-                            </View>
-                            <View style={styles.statCircle}>
-                                <CircularProgress 
-                                    size={70}
-                                    progress={2}
-                                    strokeWidth={7}
-                                    strokeColor="#3498db" 
-                                />
-                                <Text style={styles.addstatLabel}>Rank</Text>
-                            </View>
-                            <View style={styles.statCircle}>
-                                <CircularProgress 
-                                    size={70}
-                                    progress={10}
-                                    strokeWidth={7}
-                                    strokeColor="#3498db" 
-                                />
-                                <Text style={styles.addstatLabel}>Impact</Text>
-                            </View>
-                        </View>
-                    </View>
 
-                    <View style={styles.chartContainer}>
-                        <Text>Trash Collected This Week</Text>
-                        <FrequencyChart />
-                    </View>
 
 
                     <TouchableOpacity style={styles.shareButton}>
                         <Text style={styles.shareButtonText}>Share Achievements</Text>
                     </TouchableOpacity>
+
+                    <TouchableOpacity
+                      style={styles.invisibleButton}
+                      onPress={() => { /* Add your button handler here */ }}
+                    >
+                      <Text style={styles.invisibleButtonText}>Invisible Button</Text>
+                    </TouchableOpacity>
+
                 </View>
             </ParallaxScrollView>
             <NavigationBar />
@@ -218,6 +128,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         alignItems: 'center',
     },
+    invisibleButton: {
+  backgroundColor: '#ffffff', // White background
+  opacity: 0, // Fully transparent
+  width: '60%',
+  height: 40, // Match your button height
+  marginTop: 10,
+  justifyContent: 'center',
+  alignItems: 'center',
+},
     backgroundContainer: {
         backgroundColor: '#67ABDD',
         padding: 50,
