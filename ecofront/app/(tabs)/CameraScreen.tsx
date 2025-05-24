@@ -1,12 +1,6 @@
-
-
-
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import { useState, useRef } from 'react';
-import { StyleSheet, TouchableOpacity, View, Text, Image, Alert } from 'react-native';
-import NavigationBar from '@/components/NavigationBar';
-
-const API_URL = ''; 
+import { StyleSheet, TouchableOpacity, View, Text, Image } from 'react-native';
 
 export default function App() {
   const [facing, setFacing] = useState<CameraType>('back');
@@ -14,13 +8,8 @@ export default function App() {
   const [imageUri, setImageUri] = useState<string | null>(null);
   const cameraRef = useRef<CameraView | null>(null); 
 
-  if (!permission) {
- 
-    return <View />;
-  }
-
+  if (!permission) return <View />;
   if (!permission.granted) {
-
     return (
       <View style={styles.container}>
         <Text style={styles.message}>We need your permission to show the camera</Text>
@@ -34,55 +23,13 @@ export default function App() {
   const takePicture = async () => {
     if (cameraRef.current) {
       const photo = await cameraRef.current.takePictureAsync();
-      console.log('Picture taken:', photo.uri);
-      setImageUri(photo.uri); 
+      setImageUri(photo.uri);
     }
   };
 
   const handleClosePreview = () => {
-    setImageUri(null); 
+    setImageUri(null);
   };
-
-  // const handleProceed = async () => {
-  //   if (imageUri) {
-  //     const formData = new FormData();
-  //     formData.append('file', {
-  //       uri: imageUri,
-  //       name: 'image.jpg',
-  //       type: 'image/jpeg',
-  //     });
-      
-  //     try {
-  //       const response = await fetch(`${API_URL}classify/`, {
-  //         method: 'POST',
-  //         body: formData,
-  //       });
-        
-  
-  //       const text = await response.text(); 
-  //       console.log('Raw response:', text); 
-  
-  //       if (!response.ok) {
-  //         const errorData = JSON.parse(text); 
-  //         throw new Error(errorData.detail || 'Network response was not ok');
-  //       }
-  
-  //       const result = JSON.parse(text); 
-  //       console.log('Response from API:', result);
-  //       Alert.alert('Prediction Result', `Predicted: ${result.prediction}`);
-  //     } catch (error) {
-  //       console.error('Error sending image:', error);
-  //       Alert.alert('Error', error.message || 'Failed to send image to API');
-  //     }
-  //   } else {
-  //     Alert.alert('Error', 'No image captured. Please take a picture first.');
-  //   }
-  // };
-  
-  
-  
-  
-  
 
   return (
     <View style={styles.container}>
@@ -101,109 +48,95 @@ export default function App() {
             <TouchableOpacity style={styles.closeButton} onPress={handleClosePreview}>
               <Text style={styles.buttonText}>X</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.proceedButton} onPress={handleProceed}>
-              <Text style={styles.buttonText}>→</Text>
-            </TouchableOpacity>
           </View>
         </View>
       )}
-
-      <NavigationBar />
     </View>
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#000',
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'center', 
-    backgroundColor: '#fff',
   },
   message: {
     textAlign: 'center',
-    paddingBottom: 10,
+    color: '#333',
+    fontSize: 16,
+    marginBottom: 20,
   },
   grantButton: {
-    backgroundColor: '#282828',
-    padding: 10,
-    borderRadius: 5,
+    backgroundColor: '#1e90ff',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
   },
   grantButtonText: {
-    color: 'white',
-    fontSize: 18,
+    color: '#fff',
     fontWeight: 'bold',
+    fontSize: 16,
   },
   camera: {
     flex: 1,
-    width: '100%', 
+    width: '100%',
   },
   buttonContainer: {
     flex: 1,
-    flexDirection: 'row',
-    backgroundColor: 'transparent',
-    margin: 64,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingBottom: 40,
   },
   button: {
-    flex: 1,
-    alignSelf: 'flex-end',
-    alignItems: 'center',
-  },
-  capturedImage: {
-    width: '100%',
-    height: '100%', 
-    borderRadius: 10, 
+    backgroundColor: 'transparent',
   },
   circle: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: 70,
+    height: 70,
     backgroundColor: '#fff',
-    bottom: 70,
+    borderRadius: 35,
+    borderWidth: 4,
+    borderColor: '#ddd',
   },
   imagePreviewContainer: {
     position: 'absolute',
-    top: '30%', 
-    left: '50%', 
-    transform: [{ translateX: -150 }, { translateY: -100 }], 
-    width: 300, 
-    height: 400, 
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 1000, 
+    top: '20%',
+    left: '10%',
+    width: '80%',
+    height: '60%',
+    zIndex: 10,
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 10,
   },
   polaroid: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 10,
-    shadowColor: '#000', 
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    width: '100%', 
-    height: '100%', 
+    flex: 1,
+    position: 'relative',
+  },
+  capturedImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
   closeButton: {
     position: 'absolute',
     top: 10,
-    left: 10,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    padding: 10,
-    borderRadius: 5,
-  },
-  proceedButton: {
-    position: 'absolute',
-    bottom: 10,
     right: 10,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    padding: 10,
-    borderRadius: 5,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    padding: 8,
+    borderRadius: 20,
   },
   buttonText: {
-    color: 'white',
-    fontSize: 24,
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });

@@ -88,7 +88,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
 
           <CustomButton
             title="Sign Up"
-            handlePress={submit}
+            // handlePress={submit}
             containerStyles={{ paddingHorizontal: 20, marginTop: 100 }}
             isLoading={isSubmitting}
           />
