@@ -1,6 +1,7 @@
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import { useState, useRef } from 'react';
 import { StyleSheet, TouchableOpacity, View, Text, Image, Alert } from 'react-native';
+import NavigationBar from '../../components/NavigationBar';
 
 export default function App() {
   const [facing, setFacing] = useState<CameraType>('back');
@@ -95,7 +96,9 @@ export default function App() {
           </View>
         </View>
       )}
+       <NavigationBar />
     </View>
+
   );
 }
 
