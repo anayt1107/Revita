@@ -9,10 +9,14 @@ const FrequencyChart: React.FC<FrequencyChartProps> = () => {
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     datasets: [
       {
-        data: [5, 8, 3, 10, 7, 6, 4], 
+        data: [0, 0, 0, 0, 0, 0, 0], 
         color: (opacity = 1) => `rgba(52, 152, 219, ${opacity})`, 
         strokeWidth: 2 
       },
+      {
+        data: [10, 10, 10, 10, 10, 10, 10],
+        color: (opacity = 0) => `rgba(0, 0, 0, ${opacity})`, // Transparent
+      }
     ],
   };
 
@@ -25,7 +29,11 @@ const FrequencyChart: React.FC<FrequencyChartProps> = () => {
         height={220} 
         fromZero={true} 
         withInnerLines={false} 
+        yAxisLabel=""       // Add prefix to Y-axis labels
+        yAxisSuffix=""      // Add suffix to Y-axis labels
+        yAxisInterval={1} 
         withVerticalLabels={true} 
+        
         chartConfig={{
           backgroundColor: '#fff',
           backgroundGradientFrom: '#fff',
@@ -36,6 +44,7 @@ const FrequencyChart: React.FC<FrequencyChartProps> = () => {
           style: {
             borderRadius: 16,
           },
+          
           propsForDots: {
             r: '6',
             strokeWidth: '2',

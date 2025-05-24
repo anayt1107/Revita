@@ -20,7 +20,7 @@ const LevelWidget = () => {
           />
         </View>
       </View>
-      <Text style={styles.levelNumber}>2</Text>
+      <Text style={styles.levelNumber}>1</Text>
     </View>
   );
 };
