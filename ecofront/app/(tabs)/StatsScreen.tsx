@@ -101,10 +101,7 @@ const StatsScreen: React.FC<StatsScreenProps> = () => {
 
                     
 
-                    <View style={styles.chartContainer}>
-                        <Text>Trash Collected This Week</Text>
-                        <FrequencyChart />
-                    </View>
+
 
 
                     <TouchableOpacity style={styles.shareButton}>
