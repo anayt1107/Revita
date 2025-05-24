@@ -83,7 +83,8 @@ export async function getAccount() {
 
     return currentAccount;
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
+    //throw new Error(error);
   }
 }
 
