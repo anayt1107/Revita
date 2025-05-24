@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
 
 const LeaderboardScreen: React.FC = () => {
-  const [selectedTab, setSelectedTab] = useState<'global' | 'recyclable' | 'friends'>('global');
+  //const [selectedTab, setSelectedTab] = useState<'global' | 'recyclable' | 'friends'>('global');
 
   // Define the current user
   const currentUser = { rank: 5, username: 'YourName', points: 1025, avatar: require('../../assets/images/random character.png'), change: -1 };
@@ -58,26 +58,7 @@ const LeaderboardScreen: React.FC = () => {
         )}
       </View>
 
-      <View style={styles.tabContainer}>
-        <TouchableOpacity
-          style={[styles.tabButton, selectedTab === 'global' && styles.activeTab]}
-          onPress={() => setSelectedTab('global')}
-        >
-          <Text style={styles.tabText}>Global</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tabButton, selectedTab === 'recyclable' && styles.activeTab]}
-          onPress={() => setSelectedTab('recyclable')}
-        >
-          <Text style={styles.tabText}>Recyclable</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tabButton, selectedTab === 'friends' && styles.activeTab]}
-          onPress={() => setSelectedTab('friends')}
-        >
-          <Text style={styles.tabText}>Friends</Text>
-        </TouchableOpacity>
-      </View>
+
 
       <View style={styles.topSection}>
         {topUsers.map((user, index) => (

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
 import { Widget } from '@/components/Widget';
-import LevelWidget from '@/components/LevelWidget'; 
+//import LevelWidget from '@/components/LevelWidget'; 
 import RecentCollectionsWidget from '@/components/RecentCollectionsWidget';
 import NavigationBar from '@/components/NavigationBar'; 
 import CustomButton from '@/components/CustomButton';
@@ -33,9 +33,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
   const logout = async () => {
     setSubmitting(true);
-    await signOut();
-    setUser(null);
-    setIsLogged(false);
+    //await signOut();
+    //setUser(null);
+    //setIsLogged(false);
     navigation.navigate('Welcome');
   };
 
@@ -61,6 +61,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
               <Text style = {styles.smallText}>by Revita Users</Text>
             </View>
           </View>
+
+          <HowItWorksWidget />
           
           <View style={styles.holder}>
             <RecentCollectionsWidget />
@@ -80,8 +82,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             ))}
           </View>
           
-          <LevelWidget />
-          <HowItWorksWidget />
+          
+          
           
           <CustomButton 
             title="Sign Out"
@@ -90,6 +92,13 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             isLoading={isSubmitting} 
             textStyles={undefined}  
           />
+          <TouchableOpacity
+  style={styles.invisibleButton}
+  onPress={() => { /* Add your button handler here */ }}
+>
+  <Text style={styles.invisibleButtonText}>Invisible Button</Text>
+</TouchableOpacity>
+          
         </ThemedView>
       </ParallaxScrollView>
       <NavigationBar />
@@ -107,6 +116,18 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
   },
+  invisibleButton: {
+  backgroundColor: '#ffffff', // White background
+  opacity: 0, // Fully transparent
+  width: '60%',
+  height: 40, // Match your button height
+  marginTop: 10,
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+invisibleButtonText: {
+  color: 'transparent',
+},
   titleContainer: {
     flexDirection: 'column',
     alignItems: 'center',
