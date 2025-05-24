@@ -41,35 +41,37 @@ export default function App() {
     }
 
     try {
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      const response = await fetch('https://wuming233-garbage-sense.hf.space/run/predict', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer #PUT KEY`, // Replace this
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'gpt-4o',
-          messages: [
-            {
-              role: 'user',
-              content: [
-                { type: 'text', text: 'Classify the type of trash in this image (plastic, metal, paper, etc).' },
-                { type: 'image_url', image_url: { url: `data:image/jpeg;base64,${base64Image}` } },
-              ],
-            },
-          ],
-          max_tokens: 100,
+          data: [`data:image/jpeg;base64,${base64Image}`], // assuming the Space takes a single base64 image
         }),
       });
-
+    
       const result = await response.json();
-      console.log('OpenAI response:', result);
-      const prediction = result.choices?.[0]?.message?.content || 'No prediction found';
-      Alert.alert('Classification Result', prediction);
+      //console.log('Hugging Face response:', result);
+      console.log(result.data?.[0].label)
+      const prediction = result.data?.[0] || 'No prediction found';
+      //console.log('Hugging Face response:', prediction);
+      //Alert.alert('Classification Result', result.data?.[0].label);
+      if (result.data?.[0].label != 'cardboard'){
+        Alert.alert('Classification Result '+ result.data?.[0].label+". You should recycle this ") ;
+        //increment score by 5
+      }
+      else{
+        Alert.alert('Classification Result '+ result.data?.[0].label+". You should NOT recycle this ") ;
+      }
+
+
+
     } catch (error: any) {
-      console.error('Error sending to OpenAI:', error);
+      console.error('Error sending to Hugging Face:', error);
       Alert.alert('Error', error.message || 'Failed to get classification');
     }
+    
   };
 
   return (
