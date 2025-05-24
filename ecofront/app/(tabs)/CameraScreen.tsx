@@ -1,11 +1,12 @@
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import { useState, useRef } from 'react';
-import { StyleSheet, TouchableOpacity, View, Text, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Text, Image, Alert } from 'react-native';
 
 export default function App() {
   const [facing, setFacing] = useState<CameraType>('back');
   const [permission, requestPermission] = useCameraPermissions();
   const [imageUri, setImageUri] = useState<string | null>(null);
+  const [base64Image, setBase64Image] = useState<string | null>(null);
   const cameraRef = useRef<CameraView | null>(null); 
 
   if (!permission) return <View />;
@@ -22,13 +23,53 @@ export default function App() {
 
   const takePicture = async () => {
     if (cameraRef.current) {
-      const photo = await cameraRef.current.takePictureAsync();
+      const photo = await cameraRef.current.takePictureAsync({ base64: true });
       setImageUri(photo.uri);
+      setBase64Image(photo.base64 || null);
     }
   };
 
   const handleClosePreview = () => {
     setImageUri(null);
+    setBase64Image(null);
+  };
+
+  const handleClassify = async () => {
+    if (!base64Image) {
+      Alert.alert('Error', 'No image to send. Please take a photo.');
+      return;
+    }
+
+    try {
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer #PUT KEY`, // Replace this
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'gpt-4o',
+          messages: [
+            {
+              role: 'user',
+              content: [
+                { type: 'text', text: 'Classify the type of trash in this image (plastic, metal, paper, etc).' },
+                { type: 'image_url', image_url: { url: `data:image/jpeg;base64,${base64Image}` } },
+              ],
+            },
+          ],
+          max_tokens: 100,
+        }),
+      });
+
+      const result = await response.json();
+      console.log('OpenAI response:', result);
+      const prediction = result.choices?.[0]?.message?.content || 'No prediction found';
+      Alert.alert('Classification Result', prediction);
+    } catch (error: any) {
+      console.error('Error sending to OpenAI:', error);
+      Alert.alert('Error', error.message || 'Failed to get classification');
+    }
   };
 
   return (
@@ -48,13 +89,15 @@ export default function App() {
             <TouchableOpacity style={styles.closeButton} onPress={handleClosePreview}>
               <Text style={styles.buttonText}>X</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.classifyButton} onPress={handleClassify}>
+              <Text style={styles.buttonText}>→</Text>
+            </TouchableOpacity>
           </View>
         </View>
       )}
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -129,6 +172,14 @@ const styles = StyleSheet.create({
   closeButton: {
     position: 'absolute',
     top: 10,
+    right: 10,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    padding: 8,
+    borderRadius: 20,
+  },
+  classifyButton: {
+    position: 'absolute',
+    bottom: 10,
     right: 10,
     backgroundColor: 'rgba(0,0,0,0.6)',
     padding: 8,
