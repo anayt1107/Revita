@@ -10,8 +10,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../../../components/CustomButton";
 import FormField from "../../../components/FormField";
 import images from "../../../constants/images";
-// import { useGlobalContext } from "../../../context/GlobalProvider";
-// import { createUser } from "../../../lib/appwrite";
 
 type SignUpScreenProps = {
   navigation: StackNavigationProp<any, any>;
