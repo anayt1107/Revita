@@ -9,6 +9,7 @@ import { RootStackParamList } from '../(tabs)/types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp, useNavigation } from '@react-navigation/native';
 
+const score =0;
 
 type StatsScreenNavigationProp = StackNavigationProp<RootStackParamList, 'StatsScreen'>;
 type StatsScreenProps = {
@@ -46,7 +47,7 @@ const StatsScreen: React.FC<StatsScreenProps> = () => {
                     <View style={styles.levelContainer}>
                         <Text style={styles.levelText}>Level 1</Text>
                         
-                        <Text style={styles.pointsText}>Points: 0 / 100</Text>
+                        <Text style={styles.pointsText}>Points: {score} / 100</Text>
                     </View>
 
                     <View style={styles.statsContainer}>
@@ -112,7 +113,7 @@ const StatsScreen: React.FC<StatsScreenProps> = () => {
                       style={styles.invisibleButton}
                       onPress={() => { /* Add your button handler here */ }}
                     >
-                      <Text style={styles.invisibleButtonText}>Invisible Button</Text>
+                      <Text style={styles.invisibleButton}>Invisible Button</Text>
                     </TouchableOpacity>
 
                 </View>
