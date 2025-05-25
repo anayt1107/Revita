@@ -1,14 +1,21 @@
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import { useState, useRef } from 'react';
 import { StyleSheet, TouchableOpacity, View, Text, Image, Alert } from 'react-native';
-import NavigationBar from '../../components/NavigationBar';
+import CustomButton from '@/components/CustomButton';
+import { useNavigation } from 'expo-router';
+// import NavigationBar from '../../components/NavigationBar';
+import NavigationCamera from '@/components/NavigationCamera';
+
+
 
 export default function App() {
+  const navigation = useNavigation();
   const [facing, setFacing] = useState<CameraType>('back');
   const [permission, requestPermission] = useCameraPermissions();
   const [imageUri, setImageUri] = useState<string | null>(null);
   const [base64Image, setBase64Image] = useState<string | null>(null);
   const cameraRef = useRef<CameraView | null>(null); 
+
 
   if (!permission) return <View />;
   if (!permission.granted) {
@@ -98,7 +105,9 @@ export default function App() {
           </View>
         </View>
       )}
-       <NavigationBar />
+       {/* <NavigationBar /> */}
+      <NavigationCamera/>
+       
     </View>
 
   );
