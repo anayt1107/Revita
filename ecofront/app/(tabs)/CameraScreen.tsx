@@ -58,7 +58,7 @@ export default function App() {
       const prediction = result.data?.[0] || 'No prediction found';
       //console.log('Hugging Face response:', prediction);
       //Alert.alert('Classification Result', result.data?.[0].label);
-      if (result.data?.[0].label != 'cardboard'){
+      if (result.data?.[0].label != 'plastic'){
         Alert.alert('Classification Result '+ result.data?.[0].label+". You should recycle this ") ;
         //increment score by 5
       }
