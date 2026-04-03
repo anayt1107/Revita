@@ -1,5 +1,8 @@
 # Revita
 
+## What this is
+
+Revita is a mobile app designed to simplify trash sorting and make eco-friendly habits more engaging. It uses AI to help users identify the correct bins for their waste and rewards them through gamified features like leaderboards and achievements. The app also fosters an online community where users can connect and motivate each other to maintain sustainable practices.
 
 
 ## Submitted to Congressional App Challenge
