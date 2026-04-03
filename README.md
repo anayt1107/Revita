@@ -1,4 +1,8 @@
-# Congressional App Challenge
+# Revita
+
+
+
+## Submitted to Congressional App Challenge
 
 The Congressional App Challenge is a nationwide competition aimed at encouraging students to engage with computer science and technology through the creation of their own apps. Our project, Revita, aims to promote community-driven environmental action among urban college students.
 
